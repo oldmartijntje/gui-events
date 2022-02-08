@@ -54,6 +54,9 @@ label.pack(ipady=10, ipadx=200, fill = 'x', padx = 10, pady = 10)
 label.bind('<Enter>',enter)
 label.bind('<Leave>',leave)
 label.bind('<Double-Button-1>',doubleClick)
+window.bind('<space>',doubleClick)
+window.bind('<+>',lambda event: change(amount + 1,'Up'))
+window.bind('-',lambda event: change(amount - 1,'Down'))
 
 
 
