@@ -4,6 +4,7 @@ string = tkinter.StringVar(value='0')
 amount = 0
 window.configure(bg = 'grey')
 touching = False
+lastClicked = 'None'
 
 def changeColor():
     if touching == True:
@@ -15,8 +16,10 @@ def changeColor():
     else:
         window.configure(bg = 'grey')
 
-def change(change):
+def change(change, button = 'None'):
     global amount
+    global lastClicked
+    lastClicked = button
     amount = change
     string.set(amount)
     changeColor()
@@ -31,20 +34,31 @@ def leave(event):
     touching = False
     changeColor()
 
+def doubleClick(event):
+    global amount
+    match lastClicked:
+        case 'Up':
+            amount = amount * 3
+        case 'Down':
+            amount = amount // 3
+    string.set(amount)
+
 button1 = tkinter.Button(window)
-button1.configure(text='Up', command= lambda: change(amount + 1))
+button1.configure(text='Up', command= lambda: change(amount + 1,'Up'))
 button1.pack(ipady=10, fill = 'x', padx = 10, pady = 10)
 
-button2 = tkinter.Button(window)
-button2.configure(textvariable=string,command = lambda: change(amount * -1))
-button2.pack(ipady=10, ipadx=200, fill = 'x', padx = 10, pady = 10)
-button2.bind('<Enter>',enter)
-button2.bind('<Leave>',leave)
+label = tkinter.Label(window)
+label.configure(textvariable=string)
+#label.configure(command = lambda: change(amount * -1,'Middle'))
+label.pack(ipady=10, ipadx=200, fill = 'x', padx = 10, pady = 10)
+label.bind('<Enter>',enter)
+label.bind('<Leave>',leave)
+label.bind('<Double-Button-1>',doubleClick)
 
 
 
 button3 = tkinter.Button(window)
-button3.configure(text='Down', command= lambda: change(amount -1))
+button3.configure(text='Down', command= lambda: change(amount -1,'Down'))
 button3.pack(ipady=10, ipadx=200, fill = 'x', padx = 10, pady = 10)
 
 
