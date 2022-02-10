@@ -8,6 +8,7 @@ __pycache__/
 
 # Distribution / packaging
 config.ini
+systemConfig.ini
 accounts/
 .Python
 build/
