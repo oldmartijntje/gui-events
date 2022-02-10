@@ -111,7 +111,6 @@ else:
 
         #for easy loading and testing the account
         #answer = 'y'#you can use this to skip the input for testing your code
-        answer = input('you will be logged out afterwards\n>')
 
         answer = input('you will be logged out afterwards\n>')
         if answer.lower() == 'y':
